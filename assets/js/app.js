@@ -1,7 +1,6 @@
 // Default Categories List
 const DEFAULT_CATEGORIES = [
     { id: 'all', name: 'جميع الروابط', icon: 'fa-solid fa-layer-group' },
-    { id: 'hnu', name: 'جامعة حلوان الأهلية (HNU)', icon: 'fa-solid fa-graduation-cap' },
     { id: 'web_design', name: 'تصميم الويب (Web Design)', icon: 'fa-solid fa-laptop-code' },
     { id: 'microsoft', name: 'برامج مايكروسوفت (Microsoft 365)', icon: 'fa-brands fa-microsoft' },
     { id: 'ai', name: 'الذكاء الاصطناعي (AI)', icon: 'fa-solid fa-robot' },
@@ -11,44 +10,6 @@ const DEFAULT_CATEGORIES = [
 
 // Curated Links Database
 const DEFAULT_LINKS = [
-    // === 🎓 HNU - جامعة حلوان الأهلية ===
-    {
-        id: 'hnu_1',
-        title: 'بوابة الطالب (MyU HNU)',
-        url: 'https://myu.hnu.edu.eg/',
-        category: 'hnu',
-        desc: 'نظام إدارة شؤون الطلاب، النتائج، تسجيل المواد، والجداول الدراسية',
-        imageType: 'auto',
-        pinned: true,
-        clicks: 45,
-        tags: ['جامعة', 'دراسة', 'مهم'],
-        createdAt: 1710000000001
-    },
-    {
-        id: 'hnu_2',
-        title: 'المكتبة الإلكترونية والمقررات (E-Books)',
-        url: 'https://e-books.hnu.edu.eg/',
-        category: 'hnu',
-        desc: 'منصة المقررات الدراسية والكتب الإلكترونية والمحاضرات لجامعة حلوان الأهلية',
-        imageType: 'auto',
-        pinned: true,
-        clicks: 40,
-        tags: ['كتب', 'دراسة'],
-        createdAt: 1710000000002
-    },
-    {
-        id: 'hnu_3',
-        title: 'موقع جامعة حلوان الأهلية الرسمي',
-        url: 'https://hnu.edu.eg/',
-        category: 'hnu',
-        desc: 'الموقع الإخباري الرسمي للجامعة والإعلانات والجداول والمواعيد',
-        imageType: 'auto',
-        pinned: false,
-        clicks: 18,
-        tags: ['جامعة', 'أخبار'],
-        createdAt: 1710000000003
-    },
-
     // === 🎨 Web Design & Frontend Tools ===
     {
         id: 'web_1',
