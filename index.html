@@ -1,17 +1,414 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-app-theme="pirate">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Piece - منصة الاختصارات</title>
+    <title>One Piece - سفينة الاختصارات والإنتاجية</title>
     <link rel="icon" type="image/x-icon" href="assets/icons/logo.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Space+Mono:wght@700&family=Tajawal:wght@400;500;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=3.5">
+    <style id="criticalLayoutOverride">
+        /* Natural Window Scroll with Fixed Pinned Sidebar */
+        html, body {
+            min-height: 100vh !important;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        @media (min-width: 991px) {
+            .app-layout {
+                display: block !important;
+                position: relative !important;
+                width: 100% !important;
+                min-height: 100vh !important;
+                margin: 0 !important;
+                padding-right: 330px !important;
+                padding-left: 24px !important;
+                box-sizing: border-box !important;
+            }
+            .sidebar {
+                position: fixed !important;
+                top: 0 !important;
+                right: 0 !important;
+                left: auto !important;
+                width: 310px !important;
+                min-width: 310px !important;
+                max-width: 310px !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
+                overflow-y: auto !important;
+                display: flex !important;
+                flex-direction: column !important;
+                box-shadow: -4px 0px 0px rgba(0, 0, 0, 0.08) !important;
+                z-index: 100 !important;
+            }
+            .main-content {
+                margin: 0 !important;
+                padding: 24px 0 60px 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+                min-height: 100vh !important;
+            }
+            .links-container.grid-view {
+                display: grid !important;
+                grid-template-columns: repeat(auto-fill, minmax(295px, 1fr)) !important;
+                gap: 20px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .link-card {
+                min-width: 0 !important;
+                box-sizing: border-box !important;
+            }
+        }
+
+        /* Cobalt High Contrast Overrides */
+        html[data-style-theme="cobalt"] .command-palette-card {
+            background: #FFFFFF !important;
+            border: 3px solid #000000 !important;
+            box-shadow: 10px 10px 0px #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .command-palette-search-wrap {
+            background: #FFFFFF !important;
+            border-bottom: 3px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .command-palette-search-wrap input {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .command-search-icon {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .command-palette-results {
+            background: #FFFFFF !important;
+        }
+        html[data-style-theme="cobalt"] .command-group-title {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .command-item-title {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .command-item-desc {
+            color: #333333 !important;
+            font-weight: 700 !important;
+        }
+        html[data-style-theme="cobalt"] .command-item-icon {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border: 2px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .command-item-icon i {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .command-item-shortcut {
+            background: #000000 !important;
+            color: #FFFF00 !important;
+            border: 1.5px solid #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .command-palette-footer {
+            background: #FFFFFF !important;
+            border-top: 3px solid #000000 !important;
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .command-keys-hint {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .command-keys-hint kbd {
+            background: #000000 !important;
+            color: #FFFF00 !important;
+            border: 1.5px solid #000000 !important;
+            box-shadow: 1.5px 1.5px 0px #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .command-keys-hint span {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .pinned-section .section-header h3,
+        html[data-style-theme="cobalt"] .pinned-section .section-header h3 i,
+        html[data-style-theme="cobalt"] .section-header h3 {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .card-action-btn {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border: 2px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .card-action-btn i {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .link-card-body h4 {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .link-card-body .link-url-text {
+            color: #000000 !important;
+            font-weight: 800 !important;
+            opacity: 0.9 !important;
+        }
+        html[data-style-theme="cobalt"] .link-card-body .link-desc {
+            color: #1A1A1A !important;
+            font-weight: 700 !important;
+        }
+        html[data-style-theme="cobalt"] .link-card-clicks {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .link-card-clicks i {
+            color: #000000 !important;
+        }
+        /* High-Contrast Empty State & Inputs in Cobalt */
+        html[data-style-theme="cobalt"] .empty-state {
+            background: #FFFFFF !important;
+            border: 3.5px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .empty-state h3 {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .empty-state p {
+            color: #222222 !important;
+            font-weight: 700 !important;
+        }
+        html[data-style-theme="cobalt"] .empty-avatar-circular {
+            background: #FFE600 !important;
+            border: 3px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .form-group input,
+        html[data-style-theme="cobalt"] .form-group select,
+        html[data-style-theme="cobalt"] .form-group textarea {
+            color: #000000 !important;
+            background: #FFFFFF !important;
+            font-weight: 800 !important;
+            border: 2.5px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .form-group select option {
+            color: #000000 !important;
+            background: #FFFFFF !important;
+        }
+        /* Cobalt Custom Select & Segmented Control High Contrast */
+        html[data-style-theme="cobalt"] .brutal-custom-select-trigger {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border: 2.5px solid #000000 !important;
+            box-shadow: 2.5px 2.5px 0px #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .brutal-custom-select-trigger .trigger-label,
+        html[data-style-theme="cobalt"] .brutal-custom-select-trigger .trigger-label span,
+        html[data-style-theme="cobalt"] .brutal-custom-select-trigger .trigger-label i,
+        html[data-style-theme="cobalt"] .brutal-custom-select-trigger .trigger-arrow {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .brutal-custom-options {
+            background: #FFFFFF !important;
+            border: 3px solid #000000 !important;
+            box-shadow: 5px 5px 0px #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .brutal-custom-option {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .brutal-custom-option i {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .brutal-custom-option:hover,
+        html[data-style-theme="cobalt"] .brutal-custom-option.selected {
+            background: #FFE600 !important;
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .brutal-segmented-control {
+            background: #FFFFFF !important;
+            border: 2.5px solid #000000 !important;
+            box-shadow: 2.5px 2.5px 0px #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .segmented-btn {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .segmented-btn i {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .segmented-btn:hover {
+            background: rgba(0, 0, 0, 0.08) !important;
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .segmented-btn.active {
+            background: #FFE600 !important;
+            color: #000000 !important;
+            border: 2px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .file-upload-box {
+            background: #FFFFFF !important;
+            border: 2.5px dashed #000000 !important;
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .file-upload-box span,
+        html[data-style-theme="cobalt"] .file-upload-box i {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        /* Cobalt Analytics & Statistics Modal High Contrast */
+        html[data-style-theme="cobalt"] .analytics-content,
+        html[data-style-theme="cobalt"] .analytics-grid-cards .an-card,
+        html[data-style-theme="cobalt"] .chart-box {
+            background: #FFFFFF !important;
+            border-color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .an-card .an-num {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .an-card .an-lbl {
+            color: #111111 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .chart-box h4 {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .chart-bar-info,
+        html[data-style-theme="cobalt"] .chart-bar-info span {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .top-links-chart-list,
+        html[data-style-theme="cobalt"] .category-dist-list,
+        html[data-style-theme="cobalt"] .chart-bar-row {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .bar-track {
+            background: #E5E7EB !important;
+            border: 2px solid #000000 !important;
+        }
+        /* Cobalt Focus Drawer: Todos & Notes Controls High Contrast */
+        html[data-style-theme="cobalt"] .btn-text-sm,
+        html[data-style-theme="cobalt"] #btnClearCompletedTodos {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border: 2.5px solid #000000 !important;
+            box-shadow: 2.5px 2.5px 0px #000000 !important;
+            font-weight: 900 !important;
+            font-size: 0.82rem !important;
+            padding: 5px 12px !important;
+            border-radius: 4px !important;
+            cursor: pointer !important;
+            transition: 0.15s ease !important;
+        }
+        html[data-style-theme="cobalt"] .btn-text-sm:hover,
+        html[data-style-theme="cobalt"] #btnClearCompletedTodos:hover {
+            background: var(--brutal-red) !important;
+            color: #FFFFFF !important;
+        }
+        html[data-style-theme="cobalt"] .notes-tool-btn,
+        html[data-style-theme="cobalt"] #btnCopyNotes,
+        html[data-style-theme="cobalt"] #btnClearNotes {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border: 2.5px solid #000000 !important;
+            box-shadow: 2.5px 2.5px 0px #000000 !important;
+            font-weight: 900 !important;
+            border-radius: 4px !important;
+            cursor: pointer !important;
+            padding: 6px 12px !important;
+            transition: 0.15s ease !important;
+        }
+        html[data-style-theme="cobalt"] .notes-tool-btn span,
+        html[data-style-theme="cobalt"] .notes-tool-btn i,
+        html[data-style-theme="cobalt"] #btnCopyNotes span,
+        html[data-style-theme="cobalt"] #btnCopyNotes i {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] #btnClearNotes i {
+            color: #000000 !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] .notes-tool-btn:hover,
+        html[data-style-theme="cobalt"] #btnCopyNotes:hover {
+            background: #FFE600 !important;
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .notes-tool-btn:hover span,
+        html[data-style-theme="cobalt"] .notes-tool-btn:hover i,
+        html[data-style-theme="cobalt"] #btnCopyNotes:hover span,
+        html[data-style-theme="cobalt"] #btnCopyNotes:hover i {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .notes-tool-btn.danger:hover,
+        html[data-style-theme="cobalt"] #btnClearNotes:hover {
+            background: var(--brutal-red) !important;
+            color: #FFFFFF !important;
+        }
+        html[data-style-theme="cobalt"] .notes-tool-btn.danger:hover i,
+        html[data-style-theme="cobalt"] #btnClearNotes:hover i {
+            color: #FFFFFF !important;
+        }
+        html[data-style-theme="cobalt"] .todos-status-text,
+        html[data-style-theme="cobalt"] .notes-stats {
+            color: #FFFFFF !important;
+            font-weight: 900 !important;
+        }
+        html[data-style-theme="cobalt"] #todoInput {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            font-weight: 800 !important;
+            border: 2.5px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] #todoInput::placeholder {
+            color: #555555 !important;
+            font-weight: 700 !important;
+        }
+        html[data-style-theme="cobalt"] .todo-item {
+            background: #FFFFFF !important;
+            border: 2px solid #000000 !important;
+        }
+        html[data-style-theme="cobalt"] .todo-item .todo-text {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] .todo-del-btn i {
+            color: #000000 !important;
+        }
+        html[data-style-theme="cobalt"] #quickNotesTextarea {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+        html[data-style-theme="cobalt"] #quickNotesTextarea::placeholder {
+            color: #555555 !important;
+            font-weight: 700 !important;
+        }
+        /* High-Visibility Straw Hat Logo in White Circle */
+        .app-logo-circular,
+        .empty-avatar-circular {
+            background: #FFFFFF !important;
+            border-radius: 50% !important;
+        }
+        body.dark-theme .app-logo-circular,
+        html[data-style-theme="noir"] .app-logo-circular,
+        body.dark-theme .empty-avatar-circular,
+        html[data-style-theme="noir"] .empty-avatar-circular {
+            background: #FFFFFF !important;
+            border: 3px solid #000000 !important;
+            box-shadow: 0 0 16px rgba(255, 230, 0, 0.45), 3px 3px 0px #000000 !important;
+            padding: 2px !important;
+            box-sizing: border-box !important;
+        }
+    </style>
 </head>
-<body class="dark-theme">
+<body class="light-theme">
     <!-- Background Glows -->
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
@@ -22,10 +419,10 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <img src="assets/images/logo.png" alt="One Piece Logo" class="app-logo-circular">
+                    <img src="assets/images/logo.png" alt="App Logo" class="app-logo-circular" id="appLogoImg">
                     <div class="logo-text">
-                        <h2>One <span>Piece</span> ⚓</h2>
-                        <p>سفينة الاختصارات والمواقع</p>
+                        <h2 id="brandTitle">One <span>Piece</span> ⚓</h2>
+                        <p id="brandSubtitle">سفينة الاختصارات والمواقع</p>
                     </div>
                 </div>
             </div>
@@ -43,7 +440,7 @@
                 </button>
             </div>
 
-            <div class="sidebar-stats">
+            <div class="sidebar-stats" id="sidebarStatsCard" title="اضغط لفتح الإحصائيات والتحليلات المتقدمة">
                 <div class="stat-card">
                     <i class="fa-solid fa-compass"></i>
                     <div class="stat-info">
@@ -52,7 +449,7 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <i class="fa-solid fa-skull-crossbones"></i>
+                    <i class="fa-solid fa-skull-crossbones" id="clicksStatIcon"></i>
                     <div class="stat-info">
                         <span class="stat-value" id="totalClicksCount">0</span>
                         <span class="stat-label">مرات الإبحار</span>
@@ -60,14 +457,19 @@
                 </div>
             </div>
 
+            <button class="analytics-shortcut-btn" id="btnOpenAnalytics" title="تحليلات استخدام الروابط ومستواك">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>عرض لوحة الإحصائيات</span>
+            </button>
+
             <div class="sidebar-footer">
-                <button class="action-btn" id="btnExportData" title="تصدير نسخة احتياطية من روابطك وتصنيفاتك">
+                <button class="action-btn" id="btnExportData" title="تصدير نسخة احتياطية من روابطك بتنسيق JSON">
                     <i class="fa-solid fa-file-export"></i>
-                    <span>تصدير</span>
+                    <span>تصدير JSON</span>
                 </button>
                 <button class="action-btn" id="btnImportData" title="استيراد روابط">
                     <i class="fa-solid fa-file-import"></i>
-                    <span>استيراد</span>
+                    <span>استيراد JSON</span>
                 </button>
                 <button class="action-btn danger-btn" id="btnClearAllData" title="تصفير والبدء من جديد">
                     <i class="fa-solid fa-trash-can"></i>
@@ -81,36 +483,130 @@
         <main class="main-content">
             <!-- Top Header -->
             <header class="top-header">
-                <div class="search-bar-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="searchInput" placeholder="ابحث في روابطك أو تصنيفاتك... (اضغط / للبحث السريع)" autocomplete="off">
-                    <kbd class="shortcut-badge">/</kbd>
-                    <button class="clear-search-btn" id="clearSearchBtn" style="display: none;">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                <div class="search-engine-area">
+                    <div class="search-bar-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="searchInput" placeholder="ابحث في روابطك، وسومك، أو اضغط Enter للبحث الخارجي... (اضغط /)" autocomplete="off">
+                        <button type="button" class="shortcut-badge clickable-shortcut-btn" id="btnSearchSlash" title="اضغط لتنشيط البحث الفوري (/)">/</button>
+                        <button class="clear-search-btn" id="clearSearchBtn" style="display: none;">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <!-- Quick Web Search Engines Bar -->
+                    <div class="search-engines-bar" id="searchEnginesBar">
+                        <span class="search-engines-label">بحث مباشر عبر:</span>
+                        <button class="engine-pill" data-engine="google" title="بحث في Google">
+                            <i class="fa-brands fa-google text-danger"></i> Google
+                        </button>
+                        <button class="engine-pill" data-engine="youtube" title="بحث في YouTube">
+                            <i class="fa-brands fa-youtube text-red"></i> YouTube
+                        </button>
+                        <button class="engine-pill" data-engine="chatgpt" title="بحث في ChatGPT">
+                            <i class="fa-solid fa-robot text-teal"></i> ChatGPT
+                        </button>
+                        <button class="engine-pill" data-engine="github" title="بحث في GitHub">
+                            <i class="fa-brands fa-github"></i> GitHub
+                        </button>
+                    </div>
                 </div>
 
                 <div class="header-actions">
-                    <button class="btn-primary" id="btnOpenAddLink">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>إضافة رابط جديد</span>
+                    <!-- Neo-Brutalist Style Variants Studio (الأشكال والأنماط البصرية) -->
+                    <div class="style-variants-bar" id="styleVariantsBar">
+                        <button class="style-pill active" data-style="yellow" title="مشمس (Sunny Studio)">
+                            <span class="pill-dot yellow-dot"></span>
+                            <span class="pill-name">مشمس 🟡</span>
+                        </button>
+                        <button class="style-pill" data-style="cobalt" title="أزرق كهربائي شبكي (Overshoot Cobalt)">
+                            <span class="pill-dot cobalt-dot"></span>
+                            <span class="pill-name">كهربائي 🔵</span>
+                        </button>
+                        <button class="style-pill" data-style="editorial" title="ورق صحفي وختم دائري (Editorial Press)">
+                            <span class="pill-dot editorial-dot"></span>
+                            <span class="pill-name">صحفي 📰</span>
+                        </button>
+                        <button class="style-pill" data-style="noir" title="دارك مينيماليست كلاسيكي (Terminal Noir)">
+                            <span class="pill-dot noir-dot"></span>
+                            <span class="pill-name">نوار ⚫</span>
+                        </button>
+                    </div>
+
+                    <!-- Command Palette Button (Ctrl+K) -->
+                    <button class="icon-btn highlight-btn" id="btnOpenCommandPalette" title="لوحة الأوامر السريعة (Ctrl + K)">
+                        <i class="fa-solid fa-terminal"></i>
                     </button>
 
-                    <button class="icon-btn" id="themeToggleBtn" title="تبديل الوضع الليلي / النهاري">
-                        <i class="fa-solid fa-moon"></i>
+                    <!-- Productivity Hub Toggle Button -->
+                    <button class="icon-btn highlight-btn" id="btnOpenProductivity" title="لوحة الإنتاجية: بومودورو • مهام اليوم • مفكرة سريعة">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span class="btn-pulse-dot"></span>
                     </button>
 
+                    <!-- Quick launch category -->
                     <button class="icon-btn" id="quickLaunchCategoryBtn" title="فتح جميع روابط هذا التصنيف دفعة واحدة">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </button>
+
+                    <!-- Add Link Button -->
+                    <button class="btn-primary" id="btnOpenAddLink">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>إضافة رابط</span>
+                    </button>
                 </div>
             </header>
+
+            <!-- Neo-Brutalist Hero Banner -->
+            <section class="brutal-hero-card">
+                <div class="brutal-hero-content">
+                    <div class="brutal-sticker-badge">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>FEATURED WORKSPACE • ONE PIECE HUB</span>
+                    </div>
+                    <h1 class="brutal-title-slam">BUILD LOUD. <mark class="brutal-yellow-mark">SHIP DAILY.</mark></h1>
+                    <p class="brutal-sub-slam">محطة انطلاقك السريعة لكافة مواقعك، أدواتك، ومشاريعك اليومية • وصول فوري، تنظيم حاسم، وبدون تشتيت.</p>
+                </div>
+
+                <!-- Neo-Brutalist Rotating Stamp Seal Badge (Inspired by Levain / Baked At Six) -->
+                <div class="brutal-stamp-badge" id="brutalStampBadge" title="ONE PIECE • SHIP DAILY • 2026">
+                    <svg class="stamp-svg" viewBox="0 0 120 120">
+                        <path id="stampCirclePath" fill="none" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" />
+                        <text class="stamp-text">
+                            <textPath href="#stampCirclePath" startOffset="0%">
+                                • ONE PIECE • SHIP DAILY • LINKHUB 2026 • SHIP ROUGH •
+                            </textPath>
+                        </text>
+                    </svg>
+                    <div class="stamp-center">
+                        <i class="fa-solid fa-arrow-down-long stamp-arrow"></i>
+                    </div>
+                </div>
+
+                <div class="brutal-hero-actions">
+                    <button class="brutal-btn-yellow" id="btnHeroPomo" title="فتح مؤقت بومودورو">
+                        <i class="fa-solid fa-stopwatch"></i>
+                        <span>بدء التركيز</span>
+                    </button>
+                    <button class="brutal-btn-white" id="btnHeroTasks" title="عرض مهام اليوم">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span>مهام اليوم</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Warning Tape Hazard Ribbon -->
+            <div class="warning-tape-ribbon">
+                <div class="tape-track">
+                    <span>⚡ MIND THE MERGE • PREVIEW EVERY PUSH • BUILD LOUD • SHIP DAILY • ONE PIECE FLEET ⚡</span>
+                    <span>⚓ ONE PIECE PIRATE FLEET • NO POLISH REQUIRED • SHIP THE ROUGH DRAFT TODAY ⚓</span>
+                </div>
+            </div>
 
             <!-- Quick Access / Pinned Bar -->
             <section class="pinned-section" id="pinnedSection" style="display: none;">
                 <div class="section-header">
                     <h3><i class="fa-solid fa-star text-warning"></i> المفضلة والمثبتة</h3>
-                    <span class="hint-text">اضغط لفتح الرابط فوراً</span>
+                    <span class="hint-text">اسحب لترتيب المفضلة أو اضغط لفتح الرابط</span>
                 </div>
                 <div class="pinned-grid" id="pinnedGrid">
                     <!-- Populated dynamically -->
@@ -119,30 +615,39 @@
 
             <!-- Main Links Area -->
             <section class="links-section">
+
+
                 <div class="section-header">
                     <div class="current-view-info">
                         <h2 id="currentCategoryTitle">جميع الروابط</h2>
                         <span class="badge" id="categoryLinksCount">0 روابط</span>
                     </div>
 
-                    <div class="view-controls">
-                        <div class="sort-select-wrapper">
-                            <select id="sortBySelect">
-                                <option value="clicks">الأكثر استخداماً</option>
-                                <option value="recent">الأحدث إضافة</option>
-                                <option value="title">أبجدياً (أ-ي)</option>
-                            </select>
+                        <div class="brutal-custom-select-wrap sort-custom-wrap" id="sortByCustomWrap">
+                            <button type="button" class="brutal-custom-select-trigger sort-custom-trigger" id="sortByCustomTrigger">
+                                <span class="trigger-label"><i class="fa-solid fa-arrow-down-short-wide"></i> <span id="sortByCustomText">الترتيب المخصص</span></span>
+                                <i class="fa-solid fa-chevron-down trigger-arrow"></i>
+                            </button>
+                            <div class="brutal-custom-options sort-custom-options" id="sortByCustomOptions">
+                                <div class="brutal-custom-option selected" data-value="custom"><i class="fa-solid fa-arrows-up-down-left-right"></i><span>الترتيب المخصص (السحب والإفلات)</span></div>
+                                <div class="brutal-custom-option" data-value="clicks"><i class="fa-solid fa-fire text-warning"></i><span>الأكثر استخداماً</span></div>
+                                <div class="brutal-custom-option" data-value="recent"><i class="fa-solid fa-clock"></i><span>الأحدث إضافة</span></div>
+                                <div class="brutal-custom-option" data-value="title"><i class="fa-solid fa-arrow-down-a-z"></i><span>أبجدياً (أ-ي)</span></div>
+                            </div>
+                            <input type="hidden" id="sortBySelect" value="custom">
                         </div>
                         <div class="view-toggle">
-                            <button class="view-btn active" data-view="grid" title="عرض شبكي">
+                            <button class="view-btn active" data-view="grid" title="عرض كروت شبكي">
                                 <i class="fa-solid fa-grip"></i>
                             </button>
-                            <button class="view-btn" data-view="list" title="عرض قائمة">
+                            <button class="view-btn" data-view="list" title="عرض قائمة مدمجة">
                                 <i class="fa-solid fa-list-ul"></i>
+                            </button>
+                            <button class="view-btn" data-view="ledger" title="عرض دفتر ليدجر (Service Ledger)">
+                                <i class="fa-solid fa-receipt"></i>
                             </button>
                         </div>
                     </div>
-                </div>
 
                 <!-- Links Grid / Container -->
                 <div class="links-container grid-view" id="linksContainer">
@@ -151,9 +656,9 @@
 
                 <!-- Empty State -->
                 <div class="empty-state" id="emptyState" style="display: none;">
-                    <img src="assets/images/logo.png" alt="Luffy" class="empty-avatar-circular">
-                    <h3>سفينتك فارغة وجاهزة للإبحار! 🏴‍☠️</h3>
-                    <p>ابدأ رحلتك الآن وأضف تصنيفاتك وروابطك الخاصة لتصل إليها بضغطة زر واحدة وتتخلص من التبويبات الكثيرة.</p>
+                    <img src="assets/images/logo.png" alt="Empty ship" class="empty-avatar-circular" id="emptyAvatarImg">
+                    <h3 id="emptyStateTitle">سفينتك فارغة وجاهزة للإبحار! 🏴‍☠️</h3>
+                    <p id="emptyStateText">ابدأ رحلتك الآن وأضف تصنيفاتك وروابطك الخاصة لتصل إليها بضغطة زر واحدة وتتخلص من التبويبات الكثيرة.</p>
                     <div class="empty-actions">
                         <button class="btn-primary" id="btnEmptyAdd">
                             <i class="fa-solid fa-plus"></i>
@@ -167,6 +672,202 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Slide-over Productivity Dock Drawer (لوحة الإنتاجية) -->
+    <!-- ============================================== -->
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="productivity-drawer" id="productivityDrawer">
+        <div class="drawer-header">
+            <div class="drawer-title-box">
+                <i class="fa-solid fa-bolt text-primary"></i>
+                <div>
+                    <h3>لوحة الإنتاجية</h3>
+                    <p>أدوات التركيز وإدارة يومك</p>
+                </div>
+            </div>
+            <button class="close-drawer-btn" id="btnCloseDrawer" title="إغلاق اللوحة">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Drawer Navigation Tabs -->
+        <div class="drawer-tabs">
+            <button class="drawer-tab-btn active" data-tab="pomodoro">
+                <i class="fa-solid fa-stopwatch"></i>
+                <span>بومودورو</span>
+            </button>
+            <button class="drawer-tab-btn" data-tab="todos">
+                <i class="fa-solid fa-list-check"></i>
+                <span>المهام</span>
+                <span class="tab-badge" id="todosCountBadge">0</span>
+            </button>
+            <button class="drawer-tab-btn" data-tab="notes">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>المفكرة</span>
+            </button>
+        </div>
+
+        <div class="drawer-content">
+            <!-- TAB 1: POMODORO -->
+            <div class="drawer-tab-pane active" id="tabPomodoro">
+                <div class="pomodoro-card">
+                    <div class="pomodoro-modes">
+                        <button class="pomo-mode-btn active" data-minutes="25">تركيز (25د)</button>
+                        <button class="pomo-mode-btn" data-minutes="5">استراحة قصيرة (5د)</button>
+                        <button class="pomo-mode-btn" data-minutes="15">استراحة طويلة (15د)</button>
+                    </div>
+
+                    <div class="timer-display-wrap">
+                        <svg class="timer-progress-svg" viewBox="0 0 200 200">
+                            <circle class="timer-bg-circle" cx="100" cy="100" r="88"></circle>
+                            <circle class="timer-active-circle" id="timerProgressCircle" cx="100" cy="100" r="88"></circle>
+                        </svg>
+                        <div class="timer-text-content">
+                            <span class="timer-time" id="timerDisplay">25:00</span>
+                            <span class="timer-status" id="timerStatusLabel">جاهز للتركيز 🔥</span>
+                        </div>
+                    </div>
+
+                    <div class="timer-controls">
+                        <button class="timer-btn-primary" id="btnToggleTimer">
+                            <i class="fa-solid fa-play" id="timerPlayIcon"></i>
+                            <span id="timerPlayText">ابدأ التركيز</span>
+                        </button>
+                        <button class="timer-btn-secondary" id="btnResetTimer" title="إعادة ضبط المؤقت">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="pomodoro-footer-info">
+                        <div class="pomo-stat-item">
+                            <span class="pomo-stat-num" id="pomoSessionsCount">0</span>
+                            <span class="pomo-stat-lbl">جلسات مكتملة اليوم</span>
+                        </div>
+                        <label class="pomo-sound-toggle">
+                            <input type="checkbox" id="pomoSoundToggle" checked>
+                            <span>تنبيه صوتي لطيف 🔔</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: TODOS -->
+            <div class="drawer-tab-pane" id="tabTodos">
+                <div class="todos-wrap">
+                    <form id="todoForm" class="todo-input-bar">
+                        <input type="text" id="todoInput" placeholder="اكتب مهمة جديدة ثم اضغط Enter..." autocomplete="off">
+                        <button type="submit" class="todo-add-btn" title="إضافة المهمة">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </form>
+
+                    <div class="todos-actions-bar">
+                        <span class="todos-status-text" id="todosRemainingText">0 مهام متبقية</span>
+                        <button type="button" class="btn-text-sm" id="btnClearCompletedTodos">حذف المكتملة</button>
+                    </div>
+
+                    <ul class="todos-list" id="todosList">
+                        <!-- Populated dynamically -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TAB 3: NOTES -->
+            <div class="drawer-tab-pane" id="tabNotes">
+                <div class="notes-wrap">
+                    <div class="notes-toolbar">
+                        <span class="notes-stats" id="notesStatsLabel">0 كلمة • 0 حرف</span>
+                        <div class="notes-actions">
+                            <button type="button" class="notes-tool-btn" id="btnCopyNotes" title="نسخ الملاحظات للذاكرة">
+                                <i class="fa-solid fa-copy"></i>
+                                <span>نسخ</span>
+                            </button>
+                            <button type="button" class="notes-tool-btn danger" id="btnClearNotes" title="مسح الملاحظات">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="quickNotesTextarea" placeholder="اكتب هنا أي فكرة سريعة، كود، رابط، أو ملاحظة... سيتم الحفظ تلقائياً في جهازك ✍️"></textarea>
+                    <div class="notes-save-status">
+                        <i class="fa-solid fa-circle-check text-success"></i>
+                        <span>محفوظ محلياً في جهازك</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ============================================== -->
+    <!-- Analytics & Stats Modal (لوحة الإحصائيات المتقدمة) -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="analyticsModal">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-chart-pie text-primary"></i> مركز الإحصائيات وتحليلات الاستخدام</h3>
+                <button class="close-modal-btn" id="btnCloseAnalyticsModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="analytics-content">
+                <!-- User Rank & Level Card -->
+                <div class="rank-card" id="userRankCard">
+                    <div class="rank-icon-wrap" id="rankIconWrap">
+                        <i class="fa-solid fa-anchor"></i>
+                    </div>
+                    <div class="rank-details">
+                        <div class="rank-title-row">
+                            <span class="rank-badge-title" id="rankBadgeTitle">ملاح جديد 🧭</span>
+                            <span class="rank-xp-label" id="rankClicksTotal">0 نقرة إبحار</span>
+                        </div>
+                        <p class="rank-desc" id="rankDesc">أهلاً بك في رحلتك! أضف واستخدم روابطك لترقية رتبتك إلى قبطان عظيم.</p>
+                        <div class="rank-progress-bar-wrap">
+                            <div class="rank-progress-fill" id="rankProgressFill" style="width: 15%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Summary 4-Grid -->
+                <div class="analytics-grid-cards">
+                    <div class="an-card">
+                        <i class="fa-solid fa-link text-primary"></i>
+                        <span class="an-num" id="anTotalLinks">0</span>
+                        <span class="an-lbl">إجمالي الروابط</span>
+                    </div>
+                    <div class="an-card">
+                        <i class="fa-solid fa-compass text-secondary"></i>
+                        <span class="an-num" id="anTotalClicks">0</span>
+                        <span class="an-lbl">إجمالي الزيارات</span>
+                    </div>
+                    <div class="an-card">
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <span class="an-num" id="anTotalPinned">0</span>
+                        <span class="an-lbl">المفضلة والمثبتة</span>
+                    </div>
+                    <div class="an-card">
+                        <i class="fa-solid fa-folder-tree text-success"></i>
+                        <span class="an-num" id="anTotalCategories">0</span>
+                        <span class="an-lbl">عدد التصنيفات</span>
+                    </div>
+                </div>
+
+                <!-- 2-Columns: Top Links & Categories -->
+                <div class="analytics-charts-split">
+                    <div class="chart-box">
+                        <h4><i class="fa-solid fa-fire text-danger"></i> أكثر 5 مواقع زيارة</h4>
+                        <div class="top-links-chart-list" id="topLinksChartList">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="chart-box">
+                        <h4><i class="fa-solid fa-layer-group text-primary"></i> توزيع الروابط حسب التصنيف</h4>
+                        <div class="category-dist-list" id="categoryDistList">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Modal: Add / Edit Link -->
@@ -191,27 +892,41 @@
                     <label for="linkTitle">اسم الموقع / الاختصار <span class="required">*</span></label>
                     <div class="input-with-icon">
                         <i class="fa-solid fa-heading"></i>
-                        <input type="text" id="linkTitle" placeholder="مثال: يوتيوب، دراستي، حسابي، ون بيس أونلاين..." required>
+                        <input type="text" id="linkTitle" placeholder="مثال: يوتيوب، دراستي، حسابي، أدوات التصميم..." required>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="linkCategory">التصنيف <span class="required">*</span></label>
-                        <select id="linkCategory" required>
-                            <!-- Populated dynamically -->
-                        </select>
+                <div class="form-group">
+                    <label>التصنيف <span class="required">*</span></label>
+                    <div class="brutal-custom-select-wrap" id="customCategoryWrap">
+                        <button type="button" class="brutal-custom-select-trigger" id="customCategoryTrigger">
+                            <span class="trigger-label"><i class="fa-solid fa-layer-group"></i> <span id="customCategoryTriggerText">اختر التصنيف...</span></span>
+                            <i class="fa-solid fa-chevron-down trigger-arrow"></i>
+                        </button>
+                        <div class="brutal-custom-options" id="customCategoryOptions">
+                            <!-- Populated dynamically via JS -->
+                        </div>
                     </div>
+                    <input type="hidden" id="linkCategory" value="web_design" required>
+                </div>
 
-                    <div class="form-group">
-                        <label for="imageSourceType">نوع الصورة / الأيقونة</label>
-                        <select id="imageSourceType">
-                            <option value="auto">تلقائي من الموقع (Favicon)</option>
-                            <option value="upload">رفع صورة من جهازك 🖼️</option>
-                            <option value="url">رابط صورة خارجي 🌐</option>
-                            <option value="icon">اختيار أيقونة جاهزة 🎨</option>
-                        </select>
+                <div class="form-group">
+                    <label>نوع الصورة / الأيقونة</label>
+                    <div class="brutal-segmented-control" id="imageTypeSegmented">
+                        <button type="button" class="segmented-btn active" data-type="auto">
+                            <i class="fa-solid fa-bolt"></i> تلقائي (Favicon)
+                        </button>
+                        <button type="button" class="segmented-btn" data-type="upload">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> رفع صورة
+                        </button>
+                        <button type="button" class="segmented-btn" data-type="url">
+                            <i class="fa-solid fa-link"></i> رابط خارجي
+                        </button>
+                        <button type="button" class="segmented-btn" data-type="icon">
+                            <i class="fa-solid fa-icons"></i> أيقونة جاهزة
+                        </button>
                     </div>
+                    <input type="hidden" id="imageSourceType" value="auto">
                 </div>
 
                 <!-- Custom Image Upload Section -->
@@ -239,8 +954,46 @@
 
                 <!-- Custom Icon Section -->
                 <div class="form-group image-option" id="iconOptionGroup" style="display: none;">
-                    <label for="linkCustomIcon">الأيقونة الجاهزة</label>
-                    <select id="linkCustomIcon">
+                    <label>الأيقونة الجاهزة</label>
+                    <div class="brutal-icon-grid-selector" id="brutalIconGrid">
+                        <button type="button" class="icon-grid-tile active" data-icon="fa-solid fa-skull-crossbones" title="شعار القراصنة ☠️">
+                            <i class="fa-solid fa-skull-crossbones"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-anchor" title="مرساة سفينة ⚓">
+                            <i class="fa-solid fa-anchor"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-film" title="أنمي ومسلسلات 🎬">
+                            <i class="fa-solid fa-film"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-gamepad" title="ألعاب وترفيه 🎮">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-briefcase" title="عمل وإنتاجية 💼">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-code" title="برمجة وتطوير 💻">
+                            <i class="fa-solid fa-code"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-graduation-cap" title="دراسة وتعليم 🎓">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-cart-shopping" title="تسوق ومتاجر 🛒">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-comments" title="محادثات وتواصل 💬">
+                            <i class="fa-solid fa-comments"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-book-open" title="قراءة ومانجا 📖">
+                            <i class="fa-solid fa-book-open"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-robot" title="ذكاء اصطناعي 🤖">
+                            <i class="fa-solid fa-robot"></i>
+                        </button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-music" title="صوتيات وموسيقى 🎵">
+                            <i class="fa-solid fa-music"></i>
+                        </button>
+                    </div>
+                    <select id="linkCustomIcon" style="display: none;">
                         <option value="fa-solid fa-skull-crossbones">شعار القراصنة ☠️</option>
                         <option value="fa-solid fa-anchor">مرساة سفينة ⚓</option>
                         <option value="fa-solid fa-film">أنمي ومسلسلات 🎬</option>
@@ -252,6 +1005,15 @@
                         <option value="fa-solid fa-comments">محادثات وتواصل 💬</option>
                         <option value="fa-solid fa-book-open">قراءة ومانجا 📖</option>
                     </select>
+                </div>
+
+                <!-- Tags Input -->
+                <div class="form-group">
+                    <label for="linkTags">الوسوم (اختياري - مفصولة بفواصل)</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-tags"></i>
+                        <input type="text" id="linkTags" placeholder="مثال: مهم، دراسة، يومي، مشاريع">
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -289,19 +1051,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="categoryIcon">أيقونة التصنيف</label>
-                    <select id="categoryIcon">
-                        <option value="fa-solid fa-folder">مجلد عادي 📁</option>
-                        <option value="fa-solid fa-skull-crossbones">قراصنة ون بيس ☠️</option>
-                        <option value="fa-solid fa-anchor">مرساة ⚓</option>
-                        <option value="fa-solid fa-film">أنمي وميديا 🎬</option>
-                        <option value="fa-solid fa-briefcase">عمل 💼</option>
-                        <option value="fa-solid fa-laptop-code">برمجة ومشاريع 💻</option>
-                        <option value="fa-solid fa-graduation-cap">دراسة 🎓</option>
-                        <option value="fa-solid fa-gamepad">ألعاب 🎮</option>
-                        <option value="fa-solid fa-heart">مفضلاتي ❤️</option>
-                        <option value="fa-solid fa-wrench">أدوات 🛠️</option>
-                    </select>
+                    <label>أيقونة التصنيف</label>
+                    <div class="brutal-icon-grid-selector" id="categoryIconGrid">
+                        <button type="button" class="icon-grid-tile active" data-icon="fa-solid fa-folder" title="مجلد 📁"><i class="fa-solid fa-folder"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-skull-crossbones" title="قراصنة ون بيس ☠️"><i class="fa-solid fa-skull-crossbones"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-anchor" title="مرساة ⚓"><i class="fa-solid fa-anchor"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-film" title="أنمي وميديا 🎬"><i class="fa-solid fa-film"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-briefcase" title="عمل وإنتاجية 💼"><i class="fa-solid fa-briefcase"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-laptop-code" title="برمجة 💻"><i class="fa-solid fa-laptop-code"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-graduation-cap" title="دراسة 🎓"><i class="fa-solid fa-graduation-cap"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-gamepad" title="ألعاب 🎮"><i class="fa-solid fa-gamepad"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-heart" title="مفضلاتي ❤️"><i class="fa-solid fa-heart"></i></button>
+                        <button type="button" class="icon-grid-tile" data-icon="fa-solid fa-wrench" title="أدوات 🛠️"><i class="fa-solid fa-wrench"></i></button>
+                    </div>
+                    <input type="hidden" id="categoryIcon" value="fa-solid fa-folder">
                 </div>
 
                 <div class="modal-actions">
@@ -312,10 +1075,317 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
+    <!-- ============================================== -->
+    <!-- Quick QR Code Modal (مشاركة الرابط للموبايل) -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="qrCodeModal">
+        <div class="modal-card modal-sm brutal-qr-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-qrcode text-warning"></i> رمز QR السريع 📱</h3>
+                <button class="close-modal-btn" id="btnCloseQrModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="qr-modal-body">
+                <div class="qr-frame">
+                    <img id="qrCodeImg" src="" alt="QR Code" class="qr-code-img">
+                </div>
+                <h4 id="qrLinkTitle" class="qr-title-text">اسم الموقع</h4>
+                <p id="qrLinkUrl" class="qr-url-text">https://example.com</p>
+                <div class="qr-modal-actions">
+                    <button type="button" class="brutal-btn-yellow" id="btnCopyQrUrl">
+                        <i class="fa-solid fa-copy"></i>
+                        <span>نسخ الرابط</span>
+                    </button>
+                    <button type="button" class="brutal-btn-white" id="btnCloseQrModalBottom">
+                        <span>إغلاق</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Custom Neo-Brutalist Internal Dialog (Alert / Confirm) -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="brutalDialogModal">
+        <div class="modal-card brutal-dialog-card">
+            <div class="brutal-dialog-header" id="brutalDialogHeader">
+                <div class="brutal-dialog-badge" id="brutalDialogBadge">
+                    <i class="fa-solid fa-triangle-exclamation" id="brutalDialogIcon"></i>
+                    <span id="brutalDialogTypeLabel">تأكيد الإجراء</span>
+                </div>
+                <button class="close-modal-btn" id="btnCloseDialogTop"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="brutal-dialog-body">
+                <h3 id="brutalDialogTitle">هل أنت متأكد؟</h3>
+                <p id="brutalDialogDesc">سيتم تنفيذ هذا الإجراء فوراً.</p>
+            </div>
+            <div class="brutal-dialog-actions" id="brutalDialogActions">
+                <button type="button" class="brutal-btn-white" id="btnDialogCancel">إلغاء</button>
+                <button type="button" class="brutal-btn-yellow" id="btnDialogConfirm">نعم، متابعة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Neo-Brutalist Command Palette (Ctrl + K) -->
+    <!-- ============================================== -->
+    <div class="modal-overlay command-palette-overlay" id="commandPaletteModal">
+        <div class="modal-card command-palette-card">
+            <div class="command-palette-search-wrap">
+                <i class="fa-solid fa-terminal command-search-icon"></i>
+                <input type="text" id="commandPaletteInput" placeholder="اكتب أمراً، أو ابحث في روابطك... (استخدم الأسهم للتحرك و Enter)" autocomplete="off">
+                <kbd class="command-esc-badge" id="btnEscCommand">ESC</kbd>
+            </div>
+            <div class="command-palette-results" id="commandPaletteResults">
+                <!-- Populated dynamically via JS -->
+            </div>
+            <div class="command-palette-footer">
+                <div class="command-keys-hint">
+                    <span><kbd>↑</kbd> <kbd>↓</kbd> للتنقل</span>
+                    <span><kbd>↵</kbd> للتنفيذ</span>
+                    <span><kbd>ESC</kbd> للإغلاق</span>
+                </div>
+                <span class="command-palette-brand">⚡ سفينة الأوامر • One Piece</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Feature 1: Read Later Shelf Modal -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="readLaterShelfModal">
+        <div class="modal-card brutal-shelf-card" style="max-width: 600px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-bookmark text-warning"></i>
+                    <span>خزانة قراءة لاحقاً (Read Later)</span>
+                </div>
+                <button class="close-modal-btn" id="btnCloseReadLater"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="shelf-list" id="shelfLinksList">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                <button type="button" class="action-btn danger-btn" id="btnClearReadLater" style="max-width: 140px;">
+                    <i class="fa-solid fa-trash-can"></i> إفراغ الخزانة
+                </button>
+                <button type="button" class="brutal-btn-yellow" id="btnCloseReadLaterBottom">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Feature 2: Live Link Health Checker Modal -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="healthCheckModal">
+        <div class="modal-card" style="max-width: 650px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-heart-pulse text-danger"></i>
+                    <span>فاحص سلامة الروابط المباشر</span>
+                </div>
+                <button class="close-modal-btn" id="btnCloseHealthCheck"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="health-summary-banner">
+                    <span id="healthScanStatusText">اضغط "بدء الفحص" لاختبار حالة اتصال جميع الروابط</span>
+                    <div class="health-stats-row">
+                        <span class="health-stat-pill"><i class="fa-solid fa-circle-check text-success"></i> <span id="healthPassCount">0</span> شغال</span>
+                        <span class="health-stat-pill"><i class="fa-solid fa-circle-xmark text-danger"></i> <span id="healthFailCount">0</span> معطل</span>
+                    </div>
+                </div>
+                <div class="health-progress-bar-wrap">
+                    <div class="health-progress-bar-fill" id="healthProgressFill"></div>
+                </div>
+                <div class="shelf-list" id="healthResultsList" style="max-height: 320px;">
+                    <!-- Results populated dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                <button type="button" class="brutal-btn-yellow" id="btnStartHealthScan">
+                    <i class="fa-solid fa-play"></i> بدء الفحص الشامل
+                </button>
+                <button type="button" class="brutal-btn-white" id="btnCloseHealthCheckBottom">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Feature 3: Bookmarks HTML Importer Modal -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="bookmarksImportModal">
+        <div class="modal-card" style="max-width: 600px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-brands fa-chrome text-primary"></i>
+                    <span>مستورد علامات المتصفح (Chrome / Edge / Firefox)</span>
+                </div>
+                <button class="close-modal-btn" id="btnCloseBookmarksImport"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="bookmarks-drop-zone" id="bookmarksDropZone">
+                    <i class="fa-solid fa-cloud-arrow-up bookmarks-drop-icon"></i>
+                    <h4>اسحب وأفلت ملف bookmarks.html هنا</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 6px;">أو اضغط لاختيار الملف من جهازك (ملف HTML المصدّر من المتصفح)</p>
+                </div>
+                <div class="bookmarks-preview-card" id="bookmarksPreviewCard">
+                    <h4 style="margin-bottom: 8px;"><i class="fa-solid fa-circle-check text-success"></i> تم تحليل الملف بنجاح!</h4>
+                    <p style="font-size: 0.9rem;">تم العثور على <strong id="importFoundFolders">0</strong> تصنيف و <strong id="importFoundLinks">0</strong> رابط.</p>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                <button type="button" class="brutal-btn-white" id="btnCancelBookmarksImport">إلغاء</button>
+                <button type="button" class="brutal-btn-yellow" id="btnConfirmBookmarksImport" disabled>
+                    <i class="fa-solid fa-bolt"></i> استيراد وتصنيف فوري
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Feature 5: Quick Peek & Link Preview Modal -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="quickPeekModal">
+        <div class="modal-card" style="max-width: 620px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-eye text-warning"></i>
+                    <span>معاينة الرابط السريعة (Quick Peek)</span>
+                </div>
+                <button class="close-modal-btn" id="btnCloseQuickPeek"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" id="quickPeekModalBody">
+                <!-- Populated dynamically via JS -->
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                <button type="button" class="brutal-btn-white" id="btnQuickPeekCopy">
+                    <i class="fa-solid fa-copy"></i> نسخ الرابط
+                </button>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" class="brutal-btn-white" id="btnQuickPeekReadLater">
+                        <i class="fa-solid fa-bookmark"></i> قراءة لاحقاً
+                    </button>
+                    <a href="#" target="_blank" class="brutal-btn-yellow" id="btnQuickPeekLaunch" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                        <span>إبحار فوري</span> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Feature: Keyboard Shortcuts Cheat Sheet Modal (?) -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="shortcutsModal">
+        <div class="modal-card" style="max-width: 640px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-keyboard text-warning"></i>
+                    <span>اختصارات لوحة المفاتيح (Speed Navigator) ⚡</span>
+                </div>
+                <button class="close-modal-btn" id="btnCloseShortcutsModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 18px;">
+                <p style="font-size: 0.9rem; font-weight: 700; margin-bottom: 14px; color: var(--text-muted);">
+                    تحكم في السفينة وأبحر بين روابطك بسرعة الصاروخ بدون لمس الماوس:
+                </p>
+                <div class="shortcuts-grid-table">
+                    <div class="shortcut-row">
+                        <span class="shortcut-desc">فتح دليل الاختصارات</span>
+                        <kbd class="brutal-kbd">?</kbd>
+                    </div>
+                    <div class="shortcut-row">
+                        <span class="shortcut-desc">البحث الفوري في الروابط والوسوم</span>
+                        <kbd class="brutal-kbd">/</kbd>
+                    </div>
+                    <div class="shortcut-row">
+                        <span class="shortcut-desc">فتح الرابط المثبت المقابل فوراً</span>
+                        <kbd class="brutal-kbd">1 - 9</kbd>
+                    </div>
+                    <div class="shortcut-row">
+                        <span class="shortcut-desc">التنقل السريع بين كروت الروابط</span>
+                        <div style="display: flex; gap: 4px;">
+                            <kbd class="brutal-kbd">J</kbd>
+                            <kbd class="brutal-kbd">K</kbd>
+                            <span style="font-size: 0.75rem; font-weight: 800; align-self: center;">أو الأسهم</span>
+                        </div>
+                    </div>
+                    <div class="shortcut-row">
+                        <span class="shortcut-desc">فتح الرابط المحدد حالياً</span>
+                        <kbd class="brutal-kbd">Enter</kbd>
+                    </div>
+                    <div class="shortcut-row">
+                        <span class="shortcut-desc">تفعيل / إيقاف وضع التركيز (Zen Mode)</span>
+                        <kbd class="brutal-kbd">Z</kbd>
+                    </div>
+                    <div class="shortcut-row">
+                        <span class="shortcut-desc">لوحة الأوامر السريعة الشاملة</span>
+                        <div style="display: flex; gap: 4px;">
+                            <kbd class="brutal-kbd">Ctrl</kbd> + <kbd class="brutal-kbd">K</kbd>
+                        </div>
+                    </div>
+                    <div class="shortcut-row">
+                        <span class="shortcut-desc">إغلاق أي نافذة أو إلغاء التحديد</span>
+                        <kbd class="brutal-kbd">Esc</kbd>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: flex-end;">
+                <button type="button" class="btn-primary" id="btnCloseShortcutsOk" style="padding: 8px 24px;">
+                    <i class="fa-solid fa-check"></i> فهمت ذلك
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- Feature: Trash Bin & Archive Modal -->
+    <!-- ============================================== -->
+    <div class="modal-overlay" id="trashModal">
+        <div class="modal-card" style="max-width: 680px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-trash-can text-danger"></i>
+                    <span>سلة المهملات والأرشيف المسترجع 🗑️</span>
+                </div>
+                <button class="close-modal-btn" id="btnCloseTrashModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 18px; max-height: 400px; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                    <span id="trashCountLabel" style="font-weight: 800; font-size: 0.9rem;">0 روابط في السلة</span>
+                    <button type="button" class="action-btn danger-btn" id="btnEmptyTrashAll" style="font-size: 0.8rem; padding: 6px 12px;">
+                        <i class="fa-solid fa-trash-can"></i> إفراغ السلة نهائياً
+                    </button>
+                </div>
+                <div class="trash-list-container" id="trashListContainer">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                <button type="button" class="brutal-btn-white" id="btnRestoreAllTrash">
+                    <i class="fa-solid fa-rotate-left"></i> استعادة الكل
+                </button>
+                <button type="button" class="btn-secondary" id="btnCloseTrashOk">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification (Neo-Brutalist Sticker Toast with Undo Action) -->
     <div class="toast" id="toast">
-        <i class="toast-icon fa-solid fa-circle-check"></i>
-        <span class="toast-message" id="toastMessage">تمت العملية بنجاح!</span>
+        <div class="toast-left">
+            <span class="toast-badge-icon" id="toastBadgeIcon"><i class="fa-solid fa-check"></i></span>
+            <span class="toast-message" id="toastMessage">تمت العملية بنجاح!</span>
+        </div>
+        <div class="toast-actions" id="toastActions">
+            <button type="button" class="toast-undo-btn" id="btnToastUndo" style="display: none;">
+                <i class="fa-solid fa-rotate-left"></i> تراجع
+            </button>
+        </div>
+        <button class="toast-close-btn" id="btnCloseToast"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
     <script src="assets/js/app.js"></script>
