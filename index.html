@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece - منصة الاختصارات</title>
+    <link rel="icon" type="image/x-icon" href="assets/icons/logo.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="dark-theme">
+    <!-- Background Glows -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="assets/images/logo.png" alt="One Piece Logo" class="app-logo-circular">
+                    <div class="logo-text">
+                        <h2>One <span>Piece</span> ⚓</h2>
+                        <p>سفينة الاختصارات والمواقع</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title-wrapper">
+                    <span class="section-title">التصنيفات</span>
+                </div>
+                <ul class="categories-list" id="categoriesList">
+                    <!-- Populated dynamically -->
+                </ul>
+                <button class="btn-add-category" id="btnOpenAddCategory">
+                    <i class="fa-solid fa-folder-plus"></i>
+                    <span>إضافة تصنيف جديد</span>
+                </button>
+            </div>
+
+            <div class="sidebar-stats">
+                <div class="stat-card">
+                    <i class="fa-solid fa-compass"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="totalLinksCount">0</span>
+                        <span class="stat-label">رابط محفوظ</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-skull-crossbones"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="totalClicksCount">0</span>
+                        <span class="stat-label">مرات الإبحار</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="action-btn" id="btnExportData" title="تصدير نسخة احتياطية من روابطك وتصنيفاتك">
+                    <i class="fa-solid fa-file-export"></i>
+                    <span>تصدير</span>
+                </button>
+                <button class="action-btn" id="btnImportData" title="استيراد روابط">
+                    <i class="fa-solid fa-file-import"></i>
+                    <span>استيراد</span>
+                </button>
+                <button class="action-btn danger-btn" id="btnClearAllData" title="تصفير والبدء من جديد">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span>تصفير</span>
+                </button>
+                <input type="file" id="importFileInput" accept=".json" style="display: none;">
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-bar-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="ابحث في روابطك أو تصنيفاتك... (اضغط / للبحث السريع)" autocomplete="off">
+                    <kbd class="shortcut-badge">/</kbd>
+                    <button class="clear-search-btn" id="clearSearchBtn" style="display: none;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="header-actions">
+                    <button class="btn-primary" id="btnOpenAddLink">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>إضافة رابط جديد</span>
+                    </button>
+
+                    <button class="icon-btn" id="themeToggleBtn" title="تبديل الوضع الليلي / النهاري">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+
+                    <button class="icon-btn" id="quickLaunchCategoryBtn" title="فتح جميع روابط هذا التصنيف دفعة واحدة">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Quick Access / Pinned Bar -->
+            <section class="pinned-section" id="pinnedSection" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fa-solid fa-star text-warning"></i> المفضلة والمثبتة</h3>
+                    <span class="hint-text">اضغط لفتح الرابط فوراً</span>
+                </div>
+                <div class="pinned-grid" id="pinnedGrid">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- Main Links Area -->
+            <section class="links-section">
+                <div class="section-header">
+                    <div class="current-view-info">
+                        <h2 id="currentCategoryTitle">جميع الروابط</h2>
+                        <span class="badge" id="categoryLinksCount">0 روابط</span>
+                    </div>
+
+                    <div class="view-controls">
+                        <div class="sort-select-wrapper">
+                            <select id="sortBySelect">
+                                <option value="clicks">الأكثر استخداماً</option>
+                                <option value="recent">الأحدث إضافة</option>
+                                <option value="title">أبجدياً (أ-ي)</option>
+                            </select>
+                        </div>
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid" title="عرض شبكي">
+                                <i class="fa-solid fa-grip"></i>
+                            </button>
+                            <button class="view-btn" data-view="list" title="عرض قائمة">
+                                <i class="fa-solid fa-list-ul"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links Grid / Container -->
+                <div class="links-container grid-view" id="linksContainer">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <img src="assets/images/logo.png" alt="Luffy" class="empty-avatar-circular">
+                    <h3>سفينتك فارغة وجاهزة للإبحار! 🏴‍☠️</h3>
+                    <p>ابدأ رحلتك الآن وأضف تصنيفاتك وروابطك الخاصة لتصل إليها بضغطة زر واحدة وتتخلص من التبويبات الكثيرة.</p>
+                    <div class="empty-actions">
+                        <button class="btn-primary" id="btnEmptyAdd">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>إضافة أول رابط</span>
+                        </button>
+                        <button class="btn-secondary" id="btnEmptyAddCat">
+                            <i class="fa-solid fa-folder-plus"></i>
+                            <span>إنشاء تصنيف جديد</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal: Add / Edit Link -->
+    <div class="modal-overlay" id="linkModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="linkModalTitle"><i class="fa-solid fa-plus-circle"></i> إضافة رابط جديد</h3>
+                <button class="close-modal-btn" id="btnCloseLinkModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="linkForm" class="modal-form">
+                <input type="hidden" id="linkId">
+
+                <div class="form-group">
+                    <label for="linkUrl">رابط الموقع (URL) <span class="required">*</span></label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-globe"></i>
+                        <input type="url" id="linkUrl" placeholder="https://example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="linkTitle">اسم الموقع / الاختصار <span class="required">*</span></label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-heading"></i>
+                        <input type="text" id="linkTitle" placeholder="مثال: يوتيوب، دراستي، حسابي، ون بيس أونلاين..." required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="linkCategory">التصنيف <span class="required">*</span></label>
+                        <select id="linkCategory" required>
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageSourceType">نوع الصورة / الأيقونة</label>
+                        <select id="imageSourceType">
+                            <option value="auto">تلقائي من الموقع (Favicon)</option>
+                            <option value="upload">رفع صورة من جهازك 🖼️</option>
+                            <option value="url">رابط صورة خارجي 🌐</option>
+                            <option value="icon">اختيار أيقونة جاهزة 🎨</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Custom Image Upload Section -->
+                <div class="form-group image-option" id="uploadOptionGroup" style="display: none;">
+                    <label>رفع صورة من اللابتوب</label>
+                    <div class="file-upload-box" id="fileUploadBox">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>اختر صورة أو اسحبها هنا (PNG, JPG, WebP)</span>
+                        <input type="file" id="linkImageFile" accept="image/*">
+                    </div>
+                    <div class="image-preview-wrapper" id="imageUploadPreview" style="display: none;">
+                        <img src="" id="uploadPreviewImg" alt="Preview">
+                        <button type="button" class="remove-img-btn" id="btnRemoveUploadedImg"><i class="fa-solid fa-xmark"></i> حذف الصورة</button>
+                    </div>
+                </div>
+
+                <!-- Custom Image URL Section -->
+                <div class="form-group image-option" id="urlOptionGroup" style="display: none;">
+                    <label for="linkImageUrl">رابط صورة مخصصة (Image URL)</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-image"></i>
+                        <input type="url" id="linkImageUrl" placeholder="https://example.com/photo.jpg">
+                    </div>
+                </div>
+
+                <!-- Custom Icon Section -->
+                <div class="form-group image-option" id="iconOptionGroup" style="display: none;">
+                    <label for="linkCustomIcon">الأيقونة الجاهزة</label>
+                    <select id="linkCustomIcon">
+                        <option value="fa-solid fa-skull-crossbones">شعار القراصنة ☠️</option>
+                        <option value="fa-solid fa-anchor">مرساة سفينة ⚓</option>
+                        <option value="fa-solid fa-film">أنمي ومسلسلات 🎬</option>
+                        <option value="fa-solid fa-gamepad">ألعاب وترفيه 🎮</option>
+                        <option value="fa-solid fa-briefcase">عمل وإنتاجية 💼</option>
+                        <option value="fa-solid fa-code">برمجة وتطوير 💻</option>
+                        <option value="fa-solid fa-graduation-cap">دراسة وتعليم 🎓</option>
+                        <option value="fa-solid fa-cart-shopping">تسوق ومتاجر 🛒</option>
+                        <option value="fa-solid fa-comments">محادثات وتواصل 💬</option>
+                        <option value="fa-solid fa-book-open">قراءة ومانجا 📖</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="linkDesc">وصف أو ملاحظة (اختياري)</label>
+                    <textarea id="linkDesc" rows="2" placeholder="ملاحظة سريعة حول ما يخص هذا الموقع..."></textarea>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="linkPinned">
+                        <span class="checkmark"></span>
+                        <span>تثبيت في قائمة المفضلة السريعة ⭐</span>
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="btnCancelLinkModal">إلغاء</button>
+                    <button type="submit" class="btn-primary" id="btnSaveLink">حفظ الرابط</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add Category -->
+    <div class="modal-overlay" id="categoryModal">
+        <div class="modal-card modal-sm">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-folder-plus"></i> إضافة تصنيف جديد</h3>
+                <button class="close-modal-btn" id="btnCloseCategoryModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="categoryForm" class="modal-form">
+                <div class="form-group">
+                    <label for="categoryName">اسم التصنيف <span class="required">*</span></label>
+                    <input type="text" id="categoryName" placeholder="مثال: ون بيس، دراسة، شغل، برامج..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoryIcon">أيقونة التصنيف</label>
+                    <select id="categoryIcon">
+                        <option value="fa-solid fa-folder">مجلد عادي 📁</option>
+                        <option value="fa-solid fa-skull-crossbones">قراصنة ون بيس ☠️</option>
+                        <option value="fa-solid fa-anchor">مرساة ⚓</option>
+                        <option value="fa-solid fa-film">أنمي وميديا 🎬</option>
+                        <option value="fa-solid fa-briefcase">عمل 💼</option>
+                        <option value="fa-solid fa-laptop-code">برمجة ومشاريع 💻</option>
+                        <option value="fa-solid fa-graduation-cap">دراسة 🎓</option>
+                        <option value="fa-solid fa-gamepad">ألعاب 🎮</option>
+                        <option value="fa-solid fa-heart">مفضلاتي ❤️</option>
+                        <option value="fa-solid fa-wrench">أدوات 🛠️</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="btnCancelCategoryModal">إلغاء</button>
+                    <button type="submit" class="btn-primary">إضافة التصنيف</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="toast-icon fa-solid fa-circle-check"></i>
+        <span class="toast-message" id="toastMessage">تمت العملية بنجاح!</span>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
