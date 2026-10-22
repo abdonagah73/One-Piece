@@ -414,17 +414,6 @@ const DEFAULT_LINKS = [
         createdAt: 1710000000064
     },
     {
-        id: 'free_6',
-        title: 'بعيد (Baeed)',
-        url: 'https://baeed.com',
-        category: 'freelance',
-        desc: 'منصة متخصصة في نشر وظائف العمل عن بعد في الشركات العربية',
-        imageType: 'auto',
-        pinned: false,
-        clicks: 13,
-        createdAt: 1710000000065
-    },
-    {
         id: 'free_7',
         title: 'Toptal',
         url: 'https://www.toptal.com',
@@ -434,17 +423,6 @@ const DEFAULT_LINKS = [
         pinned: false,
         clicks: 10,
         createdAt: 1710000000066
-    },
-    {
-        id: 'free_8',
-        title: 'بيكاليكا (Pikalica)',
-        url: 'https://pikalica.com',
-        category: 'freelance',
-        desc: 'متجر عربي لبيع وشراء المنتجات الرقمية الجاهزة والقوالب والتصاميم',
-        imageType: 'auto',
-        pinned: false,
-        clicks: 9,
-        createdAt: 1710000000067
     },
 
     // === 💬 Social Media Platforms ===
