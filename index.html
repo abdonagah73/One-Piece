@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-app-theme="pirate">
+<html lang="ar" dir="rtl" data-app-theme="pirate" data-style-theme="cobalt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,414 +7,21 @@
     <link rel="icon" type="image/x-icon" href="assets/icons/logo.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Space+Mono:wght@700&family=Tajawal:wght@400;500;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css?v=3.5">
-    <style id="criticalLayoutOverride">
-        /* Natural Window Scroll with Fixed Pinned Sidebar */
-        html, body {
-            min-height: 100vh !important;
-            overflow-x: hidden !important;
-            overflow-y: auto !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        @media (min-width: 991px) {
-            .app-layout {
-                display: block !important;
-                position: relative !important;
-                width: 100% !important;
-                min-height: 100vh !important;
-                margin: 0 !important;
-                padding-right: 330px !important;
-                padding-left: 24px !important;
-                box-sizing: border-box !important;
-            }
-            .sidebar {
-                position: fixed !important;
-                top: 0 !important;
-                right: 0 !important;
-                left: auto !important;
-                width: 310px !important;
-                min-width: 310px !important;
-                max-width: 310px !important;
-                height: 100vh !important;
-                max-height: 100vh !important;
-                overflow-y: auto !important;
-                display: flex !important;
-                flex-direction: column !important;
-                box-shadow: -4px 0px 0px rgba(0, 0, 0, 0.08) !important;
-                z-index: 100 !important;
-            }
-            .main-content {
-                margin: 0 !important;
-                padding: 24px 0 60px 0 !important;
-                width: 100% !important;
-                max-width: 100% !important;
-                box-sizing: border-box !important;
-                min-height: 100vh !important;
-            }
-            .links-container.grid-view {
-                display: grid !important;
-                grid-template-columns: repeat(auto-fill, minmax(295px, 1fr)) !important;
-                gap: 20px !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            .link-card {
-                min-width: 0 !important;
-                box-sizing: border-box !important;
-            }
-        }
-
-        /* Cobalt High Contrast Overrides */
-        html[data-style-theme="cobalt"] .command-palette-card {
-            background: #FFFFFF !important;
-            border: 3px solid #000000 !important;
-            box-shadow: 10px 10px 0px #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .command-palette-search-wrap {
-            background: #FFFFFF !important;
-            border-bottom: 3px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .command-palette-search-wrap input {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .command-search-icon {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .command-palette-results {
-            background: #FFFFFF !important;
-        }
-        html[data-style-theme="cobalt"] .command-group-title {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .command-item-title {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .command-item-desc {
-            color: #333333 !important;
-            font-weight: 700 !important;
-        }
-        html[data-style-theme="cobalt"] .command-item-icon {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            border: 2px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .command-item-icon i {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .command-item-shortcut {
-            background: #000000 !important;
-            color: #FFFF00 !important;
-            border: 1.5px solid #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .command-palette-footer {
-            background: #FFFFFF !important;
-            border-top: 3px solid #000000 !important;
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .command-keys-hint {
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .command-keys-hint kbd {
-            background: #000000 !important;
-            color: #FFFF00 !important;
-            border: 1.5px solid #000000 !important;
-            box-shadow: 1.5px 1.5px 0px #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .command-keys-hint span {
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .pinned-section .section-header h3,
-        html[data-style-theme="cobalt"] .pinned-section .section-header h3 i,
-        html[data-style-theme="cobalt"] .section-header h3 {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .card-action-btn {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            border: 2px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .card-action-btn i {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .link-card-body h4 {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .link-card-body .link-url-text {
-            color: #000000 !important;
-            font-weight: 800 !important;
-            opacity: 0.9 !important;
-        }
-        html[data-style-theme="cobalt"] .link-card-body .link-desc {
-            color: #1A1A1A !important;
-            font-weight: 700 !important;
-        }
-        html[data-style-theme="cobalt"] .link-card-clicks {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .link-card-clicks i {
-            color: #000000 !important;
-        }
-        /* High-Contrast Empty State & Inputs in Cobalt */
-        html[data-style-theme="cobalt"] .empty-state {
-            background: #FFFFFF !important;
-            border: 3.5px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .empty-state h3 {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .empty-state p {
-            color: #222222 !important;
-            font-weight: 700 !important;
-        }
-        html[data-style-theme="cobalt"] .empty-avatar-circular {
-            background: #FFE600 !important;
-            border: 3px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .form-group input,
-        html[data-style-theme="cobalt"] .form-group select,
-        html[data-style-theme="cobalt"] .form-group textarea {
-            color: #000000 !important;
-            background: #FFFFFF !important;
-            font-weight: 800 !important;
-            border: 2.5px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .form-group select option {
-            color: #000000 !important;
-            background: #FFFFFF !important;
-        }
-        /* Cobalt Custom Select & Segmented Control High Contrast */
-        html[data-style-theme="cobalt"] .brutal-custom-select-trigger {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            border: 2.5px solid #000000 !important;
-            box-shadow: 2.5px 2.5px 0px #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .brutal-custom-select-trigger .trigger-label,
-        html[data-style-theme="cobalt"] .brutal-custom-select-trigger .trigger-label span,
-        html[data-style-theme="cobalt"] .brutal-custom-select-trigger .trigger-label i,
-        html[data-style-theme="cobalt"] .brutal-custom-select-trigger .trigger-arrow {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .brutal-custom-options {
-            background: #FFFFFF !important;
-            border: 3px solid #000000 !important;
-            box-shadow: 5px 5px 0px #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .brutal-custom-option {
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .brutal-custom-option i {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .brutal-custom-option:hover,
-        html[data-style-theme="cobalt"] .brutal-custom-option.selected {
-            background: #FFE600 !important;
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .brutal-segmented-control {
-            background: #FFFFFF !important;
-            border: 2.5px solid #000000 !important;
-            box-shadow: 2.5px 2.5px 0px #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .segmented-btn {
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .segmented-btn i {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .segmented-btn:hover {
-            background: rgba(0, 0, 0, 0.08) !important;
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .segmented-btn.active {
-            background: #FFE600 !important;
-            color: #000000 !important;
-            border: 2px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .file-upload-box {
-            background: #FFFFFF !important;
-            border: 2.5px dashed #000000 !important;
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .file-upload-box span,
-        html[data-style-theme="cobalt"] .file-upload-box i {
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        /* Cobalt Analytics & Statistics Modal High Contrast */
-        html[data-style-theme="cobalt"] .analytics-content,
-        html[data-style-theme="cobalt"] .analytics-grid-cards .an-card,
-        html[data-style-theme="cobalt"] .chart-box {
-            background: #FFFFFF !important;
-            border-color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .an-card .an-num {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .an-card .an-lbl {
-            color: #111111 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .chart-box h4 {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .chart-bar-info,
-        html[data-style-theme="cobalt"] .chart-bar-info span {
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .top-links-chart-list,
-        html[data-style-theme="cobalt"] .category-dist-list,
-        html[data-style-theme="cobalt"] .chart-bar-row {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .bar-track {
-            background: #E5E7EB !important;
-            border: 2px solid #000000 !important;
-        }
-        /* Cobalt Focus Drawer: Todos & Notes Controls High Contrast */
-        html[data-style-theme="cobalt"] .btn-text-sm,
-        html[data-style-theme="cobalt"] #btnClearCompletedTodos {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            border: 2.5px solid #000000 !important;
-            box-shadow: 2.5px 2.5px 0px #000000 !important;
-            font-weight: 900 !important;
-            font-size: 0.82rem !important;
-            padding: 5px 12px !important;
-            border-radius: 4px !important;
-            cursor: pointer !important;
-            transition: 0.15s ease !important;
-        }
-        html[data-style-theme="cobalt"] .btn-text-sm:hover,
-        html[data-style-theme="cobalt"] #btnClearCompletedTodos:hover {
-            background: var(--brutal-red) !important;
-            color: #FFFFFF !important;
-        }
-        html[data-style-theme="cobalt"] .notes-tool-btn,
-        html[data-style-theme="cobalt"] #btnCopyNotes,
-        html[data-style-theme="cobalt"] #btnClearNotes {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            border: 2.5px solid #000000 !important;
-            box-shadow: 2.5px 2.5px 0px #000000 !important;
-            font-weight: 900 !important;
-            border-radius: 4px !important;
-            cursor: pointer !important;
-            padding: 6px 12px !important;
-            transition: 0.15s ease !important;
-        }
-        html[data-style-theme="cobalt"] .notes-tool-btn span,
-        html[data-style-theme="cobalt"] .notes-tool-btn i,
-        html[data-style-theme="cobalt"] #btnCopyNotes span,
-        html[data-style-theme="cobalt"] #btnCopyNotes i {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] #btnClearNotes i {
-            color: #000000 !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] .notes-tool-btn:hover,
-        html[data-style-theme="cobalt"] #btnCopyNotes:hover {
-            background: #FFE600 !important;
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .notes-tool-btn:hover span,
-        html[data-style-theme="cobalt"] .notes-tool-btn:hover i,
-        html[data-style-theme="cobalt"] #btnCopyNotes:hover span,
-        html[data-style-theme="cobalt"] #btnCopyNotes:hover i {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .notes-tool-btn.danger:hover,
-        html[data-style-theme="cobalt"] #btnClearNotes:hover {
-            background: var(--brutal-red) !important;
-            color: #FFFFFF !important;
-        }
-        html[data-style-theme="cobalt"] .notes-tool-btn.danger:hover i,
-        html[data-style-theme="cobalt"] #btnClearNotes:hover i {
-            color: #FFFFFF !important;
-        }
-        html[data-style-theme="cobalt"] .todos-status-text,
-        html[data-style-theme="cobalt"] .notes-stats {
-            color: #FFFFFF !important;
-            font-weight: 900 !important;
-        }
-        html[data-style-theme="cobalt"] #todoInput {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            font-weight: 800 !important;
-            border: 2.5px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] #todoInput::placeholder {
-            color: #555555 !important;
-            font-weight: 700 !important;
-        }
-        html[data-style-theme="cobalt"] .todo-item {
-            background: #FFFFFF !important;
-            border: 2px solid #000000 !important;
-        }
-        html[data-style-theme="cobalt"] .todo-item .todo-text {
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] .todo-del-btn i {
-            color: #000000 !important;
-        }
-        html[data-style-theme="cobalt"] #quickNotesTextarea {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            font-weight: 800 !important;
-        }
-        html[data-style-theme="cobalt"] #quickNotesTextarea::placeholder {
-            color: #555555 !important;
-            font-weight: 700 !important;
-        }
-        /* High-Visibility Straw Hat Logo in White Circle */
-        .app-logo-circular,
-        .empty-avatar-circular {
-            background: #FFFFFF !important;
-            border-radius: 50% !important;
-        }
-        body.dark-theme .app-logo-circular,
-        html[data-style-theme="noir"] .app-logo-circular,
-        body.dark-theme .empty-avatar-circular,
-        html[data-style-theme="noir"] .empty-avatar-circular {
-            background: #FFFFFF !important;
-            border: 3px solid #000000 !important;
-            box-shadow: 0 0 16px rgba(255, 230, 0, 0.45), 3px 3px 0px #000000 !important;
-            padding: 2px !important;
-            box-sizing: border-box !important;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css?v=3.6">
+    
 </head>
-<body class="light-theme">
+<body data-style-theme="cobalt">
     <!-- Background Glows -->
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
     <div class="bg-glow glow-3"></div>
 
     <div class="app-layout">
+        <!-- Mobile Sidebar Backdrop -->
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -425,6 +32,9 @@
                         <p id="brandSubtitle">سفينة الاختصارات والمواقع</p>
                     </div>
                 </div>
+                <button type="button" class="close-sidebar-btn" id="btnCloseSidebar" title="إغلاق القائمة" aria-label="إغلاق القائمة الجانبية">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
 
             <div class="sidebar-section">
@@ -512,25 +122,10 @@
                 </div>
 
                 <div class="header-actions">
-                    <!-- Neo-Brutalist Style Variants Studio (الأشكال والأنماط البصرية) -->
-                    <div class="style-variants-bar" id="styleVariantsBar">
-                        <button class="style-pill active" data-style="yellow" title="مشمس (Sunny Studio)">
-                            <span class="pill-dot yellow-dot"></span>
-                            <span class="pill-name">مشمس 🟡</span>
-                        </button>
-                        <button class="style-pill" data-style="cobalt" title="أزرق كهربائي شبكي (Overshoot Cobalt)">
-                            <span class="pill-dot cobalt-dot"></span>
-                            <span class="pill-name">كهربائي 🔵</span>
-                        </button>
-                        <button class="style-pill" data-style="editorial" title="ورق صحفي وختم دائري (Editorial Press)">
-                            <span class="pill-dot editorial-dot"></span>
-                            <span class="pill-name">صحفي 📰</span>
-                        </button>
-                        <button class="style-pill" data-style="noir" title="دارك مينيماليست كلاسيكي (Terminal Noir)">
-                            <span class="pill-dot noir-dot"></span>
-                            <span class="pill-name">نوار ⚫</span>
-                        </button>
-                    </div>
+                    <!-- Mobile Sidebar Toggle Button -->
+                    <button type="button" class="icon-btn mobile-menu-btn" id="btnToggleSidebar" title="القائمة والتصنيفات" aria-label="فتح القائمة الجانبية">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
 
                     <!-- Command Palette Button (Ctrl+K) -->
                     <button class="icon-btn highlight-btn" id="btnOpenCommandPalette" title="لوحة الأوامر السريعة (Ctrl + K)">
@@ -556,30 +151,15 @@
                 </div>
             </header>
 
-            <!-- Neo-Brutalist Hero Banner -->
+            <!-- Modern Dashboard Welcome Hub -->
             <section class="brutal-hero-card">
                 <div class="brutal-hero-content">
                     <div class="brutal-sticker-badge">
-                        <i class="fa-solid fa-bolt"></i>
-                        <span>FEATURED WORKSPACE • ONE PIECE HUB</span>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>OFFLINE-FIRST • 100% مساحة خاصة وآمنة محلياً</span>
                     </div>
-                    <h1 class="brutal-title-slam">BUILD LOUD. <mark class="brutal-yellow-mark">SHIP DAILY.</mark></h1>
-                    <p class="brutal-sub-slam">محطة انطلاقك السريعة لكافة مواقعك، أدواتك، ومشاريعك اليومية • وصول فوري، تنظيم حاسم، وبدون تشتيت.</p>
-                </div>
-
-                <!-- Neo-Brutalist Rotating Stamp Seal Badge (Inspired by Levain / Baked At Six) -->
-                <div class="brutal-stamp-badge" id="brutalStampBadge" title="ONE PIECE • SHIP DAILY • 2026">
-                    <svg class="stamp-svg" viewBox="0 0 120 120">
-                        <path id="stampCirclePath" fill="none" d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" />
-                        <text class="stamp-text">
-                            <textPath href="#stampCirclePath" startOffset="0%">
-                                • ONE PIECE • SHIP DAILY • LINKHUB 2026 • SHIP ROUGH •
-                            </textPath>
-                        </text>
-                    </svg>
-                    <div class="stamp-center">
-                        <i class="fa-solid fa-arrow-down-long stamp-arrow"></i>
-                    </div>
+                    <h1 class="brutal-title-slam">مرحباً بك في <mark class="brutal-yellow-mark">One Piece</mark> ⚓</h1>
+                    <p class="brutal-sub-slam">محطة انطلاقك السريعة لكافة مواقعك، أدواتك، ومشاريعك اليومية • وصول فوري، تنظيم سلس، ومظهر عصري مريح للعين.</p>
                 </div>
 
                 <div class="brutal-hero-actions">
@@ -593,14 +173,6 @@
                     </button>
                 </div>
             </section>
-
-            <!-- Warning Tape Hazard Ribbon -->
-            <div class="warning-tape-ribbon">
-                <div class="tape-track">
-                    <span>⚡ MIND THE MERGE • PREVIEW EVERY PUSH • BUILD LOUD • SHIP DAILY • ONE PIECE FLEET ⚡</span>
-                    <span>⚓ ONE PIECE PIRATE FLEET • NO POLISH REQUIRED • SHIP THE ROUGH DRAFT TODAY ⚓</span>
-                </div>
-            </div>
 
             <!-- Quick Access / Pinned Bar -->
             <section class="pinned-section" id="pinnedSection" style="display: none;">
@@ -623,6 +195,7 @@
                         <span class="badge" id="categoryLinksCount">0 روابط</span>
                     </div>
 
+                    <div class="section-controls">
                         <div class="brutal-custom-select-wrap sort-custom-wrap" id="sortByCustomWrap">
                             <button type="button" class="brutal-custom-select-trigger sort-custom-trigger" id="sortByCustomTrigger">
                                 <span class="trigger-label"><i class="fa-solid fa-arrow-down-short-wide"></i> <span id="sortByCustomText">الترتيب المخصص</span></span>
@@ -648,6 +221,7 @@
                             </button>
                         </div>
                     </div>
+                </div>
 
                 <!-- Links Grid / Container -->
                 <div class="links-container grid-view" id="linksContainer">
