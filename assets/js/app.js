@@ -234,11 +234,11 @@ const DEFAULT_LINKS = [
         title: 'Microsoft Teams Web',
         url: 'https://teams.microsoft.com/',
         category: 'microsoft',
-        desc: 'الاجتماعات والمحاضرات الاونلاين والمحادثات الجماعية للفرق والجامعة',
+        desc: 'الاجتماعات والمحاضرات الاونلاين والمحادثات الجماعية للفرق والعمل',
         imageType: 'auto',
         pinned: false,
         clicks: 21,
-        tags: ['اجتماعات', 'دراسة'],
+        tags: ['اجتماعات', 'تواصل'],
         createdAt: 1710000000036
     },
     {
@@ -450,6 +450,18 @@ const DEFAULT_LINKS = [
         createdAt: 1710000000064
     },
     {
+        id: 'free_6',
+        title: 'بعيد (Baeed)',
+        url: 'https://baeed.com',
+        category: 'freelance',
+        desc: 'منصة متخصصة في نشر وظائف العمل عن بعد في الشركات العربية',
+        imageType: 'auto',
+        pinned: false,
+        clicks: 13,
+        tags: ['وظائف', 'عن_بعد'],
+        createdAt: 1710000000065
+    },
+    {
         id: 'free_7',
         title: 'Toptal',
         url: 'https://www.toptal.com',
@@ -461,7 +473,19 @@ const DEFAULT_LINKS = [
         tags: ['احترافي', 'مطورين'],
         createdAt: 1710000000066
     },
- 
+    {
+        id: 'free_8',
+        title: 'بيكاليكا (Pikalica)',
+        url: 'https://pikalica.com',
+        category: 'freelance',
+        desc: 'متجر عربي لبيع وشراء المنتجات الرقمية الجاهزة والقوالب والتصاميم',
+        imageType: 'auto',
+        pinned: false,
+        clicks: 9,
+        tags: ['قوالب', 'متجر'],
+        createdAt: 1710000000067
+    },
+
     // === 💬 Social Media Platforms ===
     {
         id: 'soc_1',
@@ -590,6 +614,22 @@ try {
 let categories = Array.isArray(storedCategories) ? storedCategories : [...DEFAULT_CATEGORIES];
 let links = Array.isArray(storedLinks) ? storedLinks : [...DEFAULT_LINKS];
 
+// Clean up legacy default university (HNU) category & links if previously cached in localStorage
+if (Array.isArray(categories)) {
+    const prevCatsLen = categories.length;
+    categories = categories.filter(c => c.id !== 'hnu');
+    if (categories.length !== prevCatsLen) {
+        localStorage.setItem('onepiece_categories', JSON.stringify(categories));
+    }
+}
+if (Array.isArray(links)) {
+    const prevLinksLen = links.length;
+    links = links.filter(l => l.category !== 'hnu' && !['hnu_1', 'hnu_2', 'hnu_3'].includes(l.id));
+    if (links.length !== prevLinksLen) {
+        localStorage.setItem('onepiece_links', JSON.stringify(links));
+    }
+}
+
 // Ensure initial state is saved to localStorage if it wasn't already
 if (storedCategories === null) {
     localStorage.setItem('onepiece_categories', JSON.stringify(categories));
@@ -602,7 +642,8 @@ let activeCategoryId = 'all';
 let searchQuery = '';
 let currentSort = 'custom';
 let currentView = localStorage.getItem('onepiece_view_mode') || 'grid';
-let currentStyleVariant = localStorage.getItem('onepiece_style_theme') || 'yellow';
+let currentStyleVariant = 'cobalt';
+localStorage.setItem('onepiece_style_theme', 'cobalt');
 let activeTag = 'all';
 let currentUploadedBase64 = null;
 let draggedLinkId = null;
@@ -678,6 +719,32 @@ const productivityDrawerEl = document.getElementById('productivityDrawer');
 const drawerBackdropEl = document.getElementById('drawerBackdrop');
 const btnOpenProductivityEl = document.getElementById('btnOpenProductivity');
 const btnCloseDrawerEl = document.getElementById('btnCloseDrawer');
+
+// Mobile Sidebar Elements
+const sidebarEl = document.getElementById('sidebar');
+const sidebarBackdropEl = document.getElementById('sidebarBackdrop');
+const btnToggleSidebarEl = document.getElementById('btnToggleSidebar');
+const btnCloseSidebarEl = document.getElementById('btnCloseSidebar');
+
+function openMobileSidebar() {
+    if (sidebarEl) sidebarEl.classList.add('open');
+    if (sidebarBackdropEl) sidebarBackdropEl.classList.add('active');
+    document.body.classList.add('sidebar-open');
+}
+
+function closeMobileSidebar() {
+    if (sidebarEl) sidebarEl.classList.remove('open');
+    if (sidebarBackdropEl) sidebarBackdropEl.classList.remove('active');
+    document.body.classList.remove('sidebar-open');
+}
+
+function toggleMobileSidebar() {
+    if (sidebarEl && sidebarEl.classList.contains('open')) {
+        closeMobileSidebar();
+    } else {
+        openMobileSidebar();
+    }
+}
 
 // Image Upload Elements
 const imageSourceType = document.getElementById('imageSourceType');
@@ -785,31 +852,27 @@ function applyTheme(themeName, mode, showNotification = true) {
 }
 
 /* ==========================================================================
-   STYLE VARIANTS STUDIO (الأشكال والأنماط البصرية الأربعة)
+   STYLE VARIANTS (النمط الكهربائي الفاخر الموحد - Electric Cobalt)
    ========================================================================== */
-function applyStyleVariant(styleName, showNotification = false) {
-    currentStyleVariant = styleName;
-    document.documentElement.setAttribute('data-style-theme', styleName);
-    document.body.setAttribute('data-style-theme', styleName);
-    localStorage.setItem('onepiece_style_theme', styleName);
+function applyStyleVariant(styleName = 'cobalt', showNotification = false) {
+    currentStyleVariant = 'cobalt';
+    document.documentElement.setAttribute('data-style-theme', 'cobalt');
+    document.body.setAttribute('data-style-theme', 'cobalt');
+    localStorage.setItem('onepiece_style_theme', 'cobalt');
 
-    // Clean legacy mode classes so each of the 4 themes renders with 100% pure styling
+    // Clean legacy mode classes so cobalt renders with 100% pure electric styling
     document.body.classList.remove('dark-theme', 'light-theme');
     document.documentElement.classList.remove('dark-theme', 'light-theme');
 
-    document.querySelectorAll('.style-pill').forEach(pill => {
-        pill.classList.toggle('active', pill.dataset.style === styleName);
-    });
-
-    const styleLabels = {
-        yellow: 'مشمس نيوبروتاليزم 🟡',
-        cobalt: 'أزرق كهربائي شبكي (Overshoot) 🔵',
-        editorial: 'ورق صحفي وختم دائري (Levain) 📰',
-        noir: 'دارك تيرمينال كلاسيكي (Terminal Noir) ⚫'
-    };
+    const stylePills = document.querySelectorAll('.style-pill');
+    if (stylePills.length > 0) {
+        stylePills.forEach(pill => {
+            pill.classList.toggle('active', pill.dataset.style === 'cobalt');
+        });
+    }
 
     if (showNotification) {
-        showToast(`تم تفعيل الستايل: ${styleLabels[styleName] || styleName}`);
+        showToast('تم تفعيل النمط الكهربائي الفاخر (Electric Cobalt) 🔵');
     }
 }
 
@@ -1035,6 +1098,9 @@ function renderCategories() {
             renderCategories();
             renderTagsBar();
             renderLinks();
+            if (window.innerWidth <= 991) {
+                closeMobileSidebar();
+            }
         });
 
         // Drop target for moving links
@@ -2484,12 +2550,24 @@ function setupEventListeners() {
             closeCategoryModal();
             closeAnalyticsModal();
             closeProductivityDrawer();
+            closeMobileSidebar();
             closeQrModal();
             closeCustomCategoryDropdown();
             closeCustomSortDropdown();
             closeCommandPalette();
         }
     });
+
+    // Mobile Sidebar Toggle & Backdrop Listeners
+    if (btnToggleSidebarEl) {
+        btnToggleSidebarEl.addEventListener('click', toggleMobileSidebar);
+    }
+    if (btnCloseSidebarEl) {
+        btnCloseSidebarEl.addEventListener('click', closeMobileSidebar);
+    }
+    if (sidebarBackdropEl) {
+        sidebarBackdropEl.addEventListener('click', closeMobileSidebar);
+    }
 
     // Sort & View options
     if (sortBySelectEl) {
@@ -2499,12 +2577,15 @@ function setupEventListeners() {
         });
     }
 
-    // Style Variants Studio pills click
-    document.querySelectorAll('.style-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-            applyStyleVariant(pill.dataset.style, true);
+    // Style Variants Studio pills (if any exist)
+    const stylePills = document.querySelectorAll('.style-pill');
+    if (stylePills.length > 0) {
+        stylePills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                applyStyleVariant(pill.dataset.style, true);
+            });
         });
-    });
+    }
 
     // View options (Grid, List, Ledger)
     document.querySelectorAll('.view-btn').forEach(btn => {
@@ -2520,16 +2601,28 @@ function setupEventListeners() {
     document.getElementById('btnCloseLinkModal').addEventListener('click', closeLinkModal);
     document.getElementById('btnCancelLinkModal').addEventListener('click', closeLinkModal);
 
-    document.getElementById('btnOpenAddCategory').addEventListener('click', openCategoryModal);
+    document.getElementById('btnOpenAddCategory').addEventListener('click', () => {
+        closeMobileSidebar();
+        openCategoryModal();
+    });
     document.getElementById('btnCloseCategoryModal').addEventListener('click', closeCategoryModal);
     document.getElementById('btnCancelCategoryModal').addEventListener('click', closeCategoryModal);
 
-    document.getElementById('btnOpenAnalytics').addEventListener('click', openAnalyticsModal);
-    document.getElementById('sidebarStatsCard').addEventListener('click', openAnalyticsModal);
+    document.getElementById('btnOpenAnalytics').addEventListener('click', () => {
+        closeMobileSidebar();
+        openAnalyticsModal();
+    });
+    document.getElementById('sidebarStatsCard').addEventListener('click', () => {
+        closeMobileSidebar();
+        openAnalyticsModal();
+    });
     document.getElementById('btnCloseAnalyticsModal').addEventListener('click', closeAnalyticsModal);
 
     quickLaunchCategoryBtnEl.addEventListener('click', openAllCategoryLinks);
-    document.getElementById('btnClearAllData').addEventListener('click', clearAllData);
+    document.getElementById('btnClearAllData').addEventListener('click', () => {
+        closeMobileSidebar();
+        clearAllData();
+    });
 
     const btnHeroPomo = document.getElementById('btnHeroPomo');
     if (btnHeroPomo) {
